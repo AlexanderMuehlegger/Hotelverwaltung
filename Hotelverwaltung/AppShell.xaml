@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Hotelverwaltung.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Hotelverwaltung"
+    xmlns:room="clr-namespace:Hotelverwaltung.Views.Room">
+
+    <FlyoutItem Title="Counter">
+        <Tab>
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Raum Verwaltung">
+        <Tab>
+            <ShellContent
+                Title="Verwaltung"
+                ContentTemplate="{DataTemplate room:RoomAdministration}"
+                Route="Raum Verwaltung" />
+        </Tab>
+    </FlyoutItem>
+
+</Shell>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotelverwaltung.Views.Room.RoomAdministration"
+             xmlns:converter="clr-namespace:Hotelverwaltung.Models.Converter"
+             Title="RoomAdministration">
+
+    <ContentPage.Resources>
+        <converter:AvailableBooleanConverter x:Key="AvailableBooleanConveret"/>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Rooms}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                         Span="2"
+                         HorizontalItemSpacing="5"
+                         VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="White">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Zimmernummer:" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="anz. Betten:" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="Preis pro Nacht:" />
+                            <Label Grid.Row="3" Grid.Column="0" Text="Verfügbar:" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding number}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding numBed}" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding nightPrice, StringFormat='{0:F2}'}" />
+                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding available, Converter={StaticResource AvailableBooleanConveret}}" >
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding available}"
+                                                 Value="Belegt">
+                                        <Setter Property="BackgroundColor" Value="Red"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+    
+</ContentPage>
